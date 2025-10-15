@@ -1,5 +1,5 @@
 
-export default function Home() {
+export default function Client() {
   return (
     <h1>СТРАНИЦА КЛИЕНТА</h1>
   )
