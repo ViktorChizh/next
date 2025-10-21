@@ -1,3 +1,2 @@
-// обучение по курсу:
-// https://itproger.com/course/next-js
+обучение по курсу: https://itproger.com/course/next-js
 
