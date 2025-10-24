@@ -10,11 +10,9 @@ const poppins = Poppins({
 
 export default function ShowLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${poppins.variable}`}>
+      <div className={`${poppins.variable}`}>
         <h1>TOP INFO</h1>
         {children}
-      </body>
-    </html>
+      </div>
   );
 }
