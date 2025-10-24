@@ -1,6 +1,8 @@
+import { use } from 'react'
 
-export default function ClientId({params}) {
+export default function ClientId({ params }) {
+  const resolvedParams = use(params)
   return (
-    <h1>СТРАНИЦА КЛИЕНТА {params.clientId}</h1>
+    <h1>СТРАНИЦА КЛИЕНТА {resolvedParams.clientId}</h1>
   )
 }
