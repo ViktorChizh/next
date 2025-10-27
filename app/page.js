@@ -1,8 +1,8 @@
 import Link from "next/link"
-import fetchData from "./tools/fetchData"
+import fetchPosts from "./tools/fetchPosts"
 
 export default async function Home() {
-  const posts = await fetchData()
+  const posts = await fetchPosts()
   return (
     <div>
     <h1>ГЛАВНАЯ СТРАНИЦА</h1>

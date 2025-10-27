@@ -1,15 +1,17 @@
-import fetchData from "../../tools/fetchData"
+import Link from "next/link"
+import fetchPostById from "../../tools/fetchPostById"
+import Post from "@/app/components/Post"
 
 export default async function PostPage({params}) {
 
-  const posts = await fetchData()
   const { postId } = await params
-  const post = posts[postId]
+  const post = await fetchPostById(postId)
 
   return (
-    <div className="post">
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
-    </div>
+    <>
+      <Link href="/">На главную</Link>
+      <Post post={post}/>
+    </>
+
   )
 }
