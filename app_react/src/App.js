@@ -13,11 +13,13 @@ class App  extends React.Component {
             <div className="name">
                 <Header title="ШАПКА САЙТА"/>
                 <h1>{this.helpText}</h1>
-                <input placeholder={this.helpText}
+                <input
+                    placeholder={this.helpText}
                     onClick={this.inputClick}
-                    onMouseEnter={this.mouseOver}/>
+                    onMouseEnter={this.mouseOver}
+                />
                 <p>{this.helpText === 'Help text' ? 'Yes' : 'No'}</p>
-                <Image image={logo} />
+                <Image image={logo} width="180px" height="180px"/>
             </div>
         )
     }
