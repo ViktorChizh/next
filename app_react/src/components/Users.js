@@ -1,37 +1,13 @@
 import React from "react"
+import User from "./User"
 
 export default class Users extends React.Component {
-    users = [
-        {
-            id: 1,
-            firstName: 'Bob',
-            lastName: 'Marley',
-            bio: 'Lorem ipsum...',
-            age: 40,
-            isHappy: true
-        },
-        {
-            id: 2,
-            firstName: 'John',
-            lastName: 'Doe',
-            bio: 'Lorem ipsum...',
-            age: 22,
-            isHappy: false
-        }
-    ]
+
     render() {
-        if(this.users.length>0)
+        if(this.props.users.length>0)
             return (
                 <div>
-                    {
-                        this.users.map(el => (
-                            <div key={el.id} className="user">
-                                <h3>{el.firstName} {el.lastName}</h3>
-                                <p>{el.bio}</p>
-                                <b>{el.isHappy ? 'Счастлив :)' : 'Не особо :('}</b>
-                            </div>
-                        ))
-                    }
+                    { this.props.users.map(el => <User key={el.id} user={el}/>) }
                 </div>
             )
         else
