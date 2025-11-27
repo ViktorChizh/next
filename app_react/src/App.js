@@ -42,7 +42,7 @@ export default class App  extends React.Component {
     }
 
     addUser(user) {
-        const id = this.state.users.length + 1
+        const id = this.state.users.length ? this.state.users[this.state.users.length-1].id + 1 : 1
         this.setState({users: [...this.state.users, {id, ...user}]})
     }
 }
