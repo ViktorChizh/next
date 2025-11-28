@@ -3,13 +3,11 @@ import Header from "./components/Header"
 import Users from "./components/Users"
 import AddUser from "./components/AddUser"
 import axios from "axios"
-
-const baseUrl = 'https://jsonplaceholder.typicode.com/users'
 export default class App  extends React.Component {
     constructor(props) {
         super(props)
 
-        axios.get(baseUrl).then(res => {
+        axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
             this.setState({users: res.data.map(u => ({
                 id: u.id,
                 firstName: u.name.split(' ')[0],
