@@ -2,28 +2,26 @@ import React from "react"
 import Header from "./components/Header"
 import Users from "./components/Users"
 import AddUser from "./components/AddUser"
+import axios from "axios"
+
+const baseUrl = 'https://jsonplaceholder.typicode.com/users'
 export default class App  extends React.Component {
     constructor(props) {
         super(props)
+
+        axios.get(baseUrl).then(res => {
+            this.setState({users: res.data.map(u => ({
+                id: u.id,
+                firstName: u.name.split(' ')[0],
+                lastName:  u.name.split(' ')[1],
+                bio: u.company.catchPhrase,
+                age: Math.floor(Math.random() * (50 - 20 + 1)) + 20,
+                isHappy: Math.random() < 0.5 ? 0 : 1
+            }))})
+        })
+
         this.state={
-            users: [
-                {
-                    id: 1,
-                    firstName: 'Bob',
-                    lastName: 'Marley',
-                    bio: 'Lorem ipsum...',
-                    age: 40,
-                    isHappy: true
-                },
-                {
-                    id: 2,
-                    firstName: 'John',
-                    lastName: 'Doe',
-                    bio: 'Lorem ipsum...',
-                    age: 22,
-                    isHappy: false
-                }
-            ]
+            users: []
         }
         this.addUser=this.addUser.bind(this)
         this.deleteUser=this.deleteUser.bind(this)
