@@ -29,6 +29,20 @@ main {
         margin-bottom: 50px;
         background-color: #3e8fa0;
         padding: 20px;
+
+        form {
+            margin-top: 20px;
+
+            input:not([type="checkbox"]),
+            textarea,
+            button {
+                width: 100%;
+                background: #134b57;
+            }
+            button:hover {
+                transform: scale(1.025);
+            }
+        }
     }
 
     .delete-icon {
@@ -57,31 +71,31 @@ aside {
     margin-top: 50px;
     margin-left: 5%;
     float: left;
+}
 
-    form {
-        input:not([type="checkbox"]),
-        textarea,
-        button {
-            width: 90%;
-            padding: 15px 5%;
-            font-weight: 300;
-            font-size: 15px;
-            margin-bottom: 10px;
-            border: 0;
-            background-color: #222;
-            color: #fff;
-            outline: none;
-        }
-        input[type="checkbox"] {
-            margin: 10px;
-        }
-        button {
-            cursor: pointer;
-            transition: transform 500ms ease;
+form {
+    input:not([type="checkbox"]),
+    textarea,
+    button {
+        width: 90%;
+        padding: 15px 5%;
+        font-weight: 300;
+        font-size: 15px;
+        margin-bottom: 10px;
+        border: 0;
+        background-color: #222;
+        color: #fff;
+        outline: none;
+    }
+    input[type="checkbox"] {
+        margin: 10px;
+    }
+    button {
+        cursor: pointer;
+        transition: transform 500ms ease;
 
-            &:hover {
-                transform: scale(1.1);
-            }
+        &:hover {
+            transform: scale(1.1);
         }
     }
 }
