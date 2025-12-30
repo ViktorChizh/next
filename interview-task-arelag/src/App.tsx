@@ -2,7 +2,7 @@ import { Task } from "./Task.tsx";
 import { Users } from "./Users.tsx";
 export const App = () => {
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <Task />
       <Users />
     </div>

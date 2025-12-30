@@ -13,7 +13,7 @@ export const Users = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <input type="text" />
       <div>
         <select> </select>
@@ -25,6 +25,6 @@ export const Users = () => {
       ) : (
         <p>Нет пользователей</p>
       )}
-    </>
+    </div>
   );
 };
