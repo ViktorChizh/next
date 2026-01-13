@@ -48,12 +48,10 @@ export const Users = () => {
               <input type="radio" name="status" value="all" />
               <span>Все</span>
             </label>
-
             <label>
               <input type="radio" name="status" value="active" />
               <span>Активные</span>
             </label>
-
             <label>
               <input type="radio" name="status" value="inactive" />
               <span>Неактивные</span>
@@ -61,7 +59,6 @@ export const Users = () => {
           </div>
         </div>
       </div>
-
       <div className="w-full flex flex-wrap justify-between">
         {error ? (
           <p>Получена ошибка: {error}</p>
