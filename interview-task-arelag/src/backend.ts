@@ -207,7 +207,7 @@ export const getEmailDomains = (): string[] => {
     const domains = new Set(
         MOCK_USERS.map((user) => user.email.split('@')[1])
     );
-    return ["все", ...Array.from(domains).sort()];
+    return Array.from(domains).sort();
 };
 
 export const getUserById = async (id: number): Promise<User | null> => {

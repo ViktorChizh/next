@@ -1,4 +1,4 @@
-import { type User } from "../../backend";
+import { type User } from "../backend";
 
 type Props = {
   user: User;
