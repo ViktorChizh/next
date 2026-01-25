@@ -5,36 +5,40 @@ import { useDebounce } from "../hooks/useDebounce";
 import { Filters } from "./Filters";
 
 export const Users = () => {
-  const [usersArr, setUsersArr] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
 
   const [searchText, setSearchText] = useState("");
-  const [domain, setDomain] = useState("");
-  const [status, setStatus] = useState("all");
+  const [emailDomain, setEmailDomain] = useState("all");
+  const [status, setStatus] = useState<
+    "active" | "inactive" | "all" | undefined
+  >("all");
 
   const debouncedSearch = useDebounce(searchText);
 
   useEffect(() => {
     searchUsers({
-      query: debouncedSearch || undefined,
+      query: debouncedSearch,
+      emailDomain,
+      status,
     })
       .then((res) => {
-        setUsersArr(res.users);
+        setUsers(res.users);
         setError("");
       })
       .catch((err) => setError(err));
-  }, [debouncedSearch, domain, status]);
+  }, [debouncedSearch, emailDomain, status]);
 
-  const domains = ["все", ...getEmailDomains()];
+  const domains = ["all", ...getEmailDomains()];
 
   return (
     <div className="flex flex-col w-[50vw] p-2.5">
       <Filters
         search={searchText}
         onSearchChange={setSearchText}
-        domain={domain}
+        emailDomain={emailDomain}
         domains={domains}
-        onDomainChange={setDomain}
+        onDomainChange={setEmailDomain}
         status={status}
         onStatusChange={setStatus}
       />
@@ -42,8 +46,8 @@ export const Users = () => {
       <div className="w-full flex flex-wrap justify-between mt-5">
         {error ? (
           <p>Получена ошибка: {error}</p>
-        ) : usersArr.length ? (
-          usersArr.map((user) => <UserCard user={user} key={user.id} />)
+        ) : users.length ? (
+          users.map((user) => <UserCard user={user} key={user.id} />)
         ) : (
           <p>Нет пользователей</p>
         )}

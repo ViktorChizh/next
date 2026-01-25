@@ -4,18 +4,17 @@ type Props = {
   search: string;
   onSearchChange: (value: string) => void;
 
-  domain: string;
+  emailDomain: string;
   domains: string[];
   onDomainChange: (value: string) => void;
-
-  status: string;
-  onStatusChange: (value: string) => void;
+  status: "active" | "inactive" | "all" | undefined;
+  onStatusChange: (value: "active" | "inactive" | "all" | undefined) => void;
 };
 
 export const Filters = ({
   search,
   onSearchChange,
-  domain,
+  emailDomain,
   domains,
   onDomainChange,
   status,
@@ -42,7 +41,7 @@ export const Filters = ({
           <select
             className="border border-gray-500 rounded-md text-base p-1.5"
             title="Email домен"
-            value={domain}
+            value={emailDomain}
             onChange={(e) => onDomainChange(e.target.value)}
           >
             {domains.map((d) => (
