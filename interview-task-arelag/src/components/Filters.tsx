@@ -3,7 +3,6 @@ import type { ChangeEvent } from "react";
 type Props = {
   search: string;
   onSearchChange: (value: string) => void;
-
   emailDomain: string;
   domains: string[];
   onDomainChange: (value: string) => void;
