@@ -1,4 +1,5 @@
 import type { ChangeEvent } from "react";
+import { SearchIcon } from "../assets/SearchIcon";
 
 type Props = {
   search: string;
@@ -6,8 +7,8 @@ type Props = {
   emailDomain: string;
   domains: string[];
   onDomainChange: (value: string) => void;
-  status: "active" | "inactive" | "all" | undefined;
-  onStatusChange: (value: "active" | "inactive" | "all" | undefined) => void;
+  status: "active" | "inactive" | "all";
+  onStatusChange: (value: "active" | "inactive" | "all") => void;
 };
 
 export const Filters = ({
@@ -19,12 +20,17 @@ export const Filters = ({
   status,
   onStatusChange,
 }: Props) => {
+  const statuses = {
+    all: "Все",
+    active: "Активные",
+    inactive: "Неактивные",
+  } as const;
   return (
-    <div className="w-full flex flex-col gap-5">
-      <div>
-        <p>Поиск</p>
+    <div className="w-full flex flex-col gap-5 pb-5 border-b border-gray-500">
+      <div className="relative w-full flex flex-col gap-1.5">
+        <b>Поиск</b>
         <input
-          className="w-full border-2 border-gray-500 rounded-md p-1.5 text-base mb-2"
+          className="w-full border-2 border-gray-500 rounded-md p-1.5 text-base mb-2 pl-8"
           placeholder="Введите имя, email или компанию..."
           type="text"
           value={search}
@@ -33,10 +39,11 @@ export const Filters = ({
           }
           autoFocus
         />
+        <SearchIcon className="absolute translate-y-8 и translate-x-2 flex items-center pointer-events-none" />
       </div>
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between mb-1.5">
         <div className="w-1/4 flex flex-col gap-1.5">
-          <p>Email домен</p>
+          <b>Email домен</b>
           <select
             className="border border-gray-500 rounded-md text-base p-1.5"
             title="Email домен"
@@ -45,46 +52,26 @@ export const Filters = ({
           >
             {domains.map((d) => (
               <option key={d} value={d}>
-                {d}
+                {d === "all" ? "все" : d}
               </option>
             ))}
           </select>
         </div>
         <div className="w-1/2 flex flex-col gap-2.5 [&>div>label:not(:first-child)]:ml-5 [&>div>label>span]:ml-1.5">
-          <p>Статус</p>
+          <b>Статус</b>
           <div>
-            <label>
-              <input
-                type="radio"
-                name="status"
-                value="all"
-                checked={status === "all"}
-                onChange={() => onStatusChange("all")}
-              />
-              <span>Все</span>
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="status"
-                value="active"
-                checked={status === "active"}
-                onChange={() => onStatusChange("active")}
-              />
-              <span>Активные</span>
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="status"
-                value="inactive"
-                checked={status === "inactive"}
-                onChange={() => onStatusChange("inactive")}
-              />
-              <span>Неактивные</span>
-            </label>
+            {(Object.keys(statuses) as (keyof typeof statuses)[]).map((s) => (
+              <label key={s}>
+                <input
+                  type="radio"
+                  name="status"
+                  value={s}
+                  checked={status === s}
+                  onChange={() => onStatusChange(s)}
+                />
+                <span>{statuses[s]}</span>
+              </label>
+            ))}
           </div>
         </div>
       </div>

@@ -57,7 +57,7 @@ const MOCK_USERS: User[] = [
         email: 'e.kozlova@outlook.com',
         avatar: 'https://i.pravatar.cc/150?img=4',
         status: 'active',
-        company: 'Сбер',
+        company: 'VK',
         role: 'Frontend Developer',
     },
     {

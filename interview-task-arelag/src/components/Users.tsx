@@ -10,9 +10,7 @@ export const Users = () => {
 
   const [searchText, setSearchText] = useState("");
   const [emailDomain, setEmailDomain] = useState("all");
-  const [status, setStatus] = useState<
-    "active" | "inactive" | "all" | undefined
-  >("all");
+  const [status, setStatus] = useState<"active" | "inactive" | "all">("all");
 
   const debouncedSearch = useDebounce(searchText);
 
@@ -26,7 +24,7 @@ export const Users = () => {
         setUsers(res.users);
         setError("");
       })
-      .catch((err) => setError(err));
+      .catch((err) => setError(err.message));
   }, [debouncedSearch, emailDomain, status]);
 
   const domains = ["all", ...getEmailDomains()];
@@ -45,7 +43,7 @@ export const Users = () => {
 
       <div className="w-full flex flex-wrap justify-between mt-5">
         {error ? (
-          <p>Получена ошибка: {error}</p>
+          <p>{error}</p>
         ) : users.length ? (
           users.map((user) => <UserCard user={user} key={user.id} />)
         ) : (
