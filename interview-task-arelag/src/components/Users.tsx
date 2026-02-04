@@ -3,6 +3,7 @@ import { searchUsers, getEmailDomains, type User } from "../backend";
 import { UserCard } from "./UserCard";
 import { useDebounce } from "../hooks/useDebounce";
 import { Filters } from "./Filters";
+import { Pagination } from "./Pagination";
 
 export const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,18 +15,18 @@ export const Users = () => {
 
   const debouncedSearch = useDebounce(searchText);
 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
-    searchUsers({
-      query: debouncedSearch,
-      emailDomain,
-      status,
-    })
+    searchUsers({ query: debouncedSearch, emailDomain, status, page })
       .then((res) => {
         setUsers(res.users);
+        setTotalPages(res.totalPages);
         setError("");
       })
       .catch((err) => setError(err.message));
-  }, [debouncedSearch, emailDomain, status]);
+  }, [debouncedSearch, emailDomain, status, page]);
 
   const domains = ["all", ...getEmailDomains()];
 
@@ -50,6 +51,7 @@ export const Users = () => {
           <p>Нет пользователей</p>
         )}
       </div>
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 };
