@@ -1,34 +1,23 @@
-import { useEffect, useState } from "react";
-import { searchUsers, getEmailDomains, type User } from "../backend";
 import { UserCard } from "./UserCard";
-import { useDebounce } from "../hooks/useDebounce";
 import { Filters } from "./Filters";
 import { Pagination } from "./Pagination";
+import { useUsers } from "../hooks/useUsers";
 
 export const Users = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [error, setError] = useState("");
-
-  const [searchText, setSearchText] = useState("");
-  const [emailDomain, setEmailDomain] = useState("all");
-  const [status, setStatus] = useState<"active" | "inactive" | "all">("all");
-
-  const debouncedSearch = useDebounce(searchText);
-
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
-  useEffect(() => {
-    searchUsers({ query: debouncedSearch, emailDomain, status, page })
-      .then((res) => {
-        setUsers(res.users);
-        setTotalPages(res.totalPages);
-        setError("");
-      })
-      .catch((err) => setError(err.message));
-  }, [debouncedSearch, emailDomain, status, page]);
-
-  const domains = ["all", ...getEmailDomains()];
+  const {
+    users,
+    error,
+    searchText,
+    setSearchText,
+    emailDomain,
+    setEmailDomain,
+    status,
+    setStatus,
+    page,
+    setPage,
+    totalPages,
+    domains,
+  } = useUsers();
 
   return (
     <div className="flex flex-col w-[50vw] p-2.5">
@@ -51,7 +40,13 @@ export const Users = () => {
           <p>Нет пользователей</p>
         )}
       </div>
-      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+      {!error && (
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      )}
     </div>
   );
 };

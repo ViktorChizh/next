@@ -1,3 +1,5 @@
+import { usePagination } from "../hooks/usePagination";
+
 type PaginationProps = {
   page: number;
   totalPages: number;
@@ -9,39 +11,9 @@ export const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
+  const pages = usePagination(page, totalPages);
+
   if (totalPages <= 1) return null;
-
-  const createRange = (start: number, end: number) => {
-    const arr = [];
-    for (let i = start; i <= end; i++) arr.push(i);
-    return arr;
-  };
-
-  const getPages = () => {
-    const pages: (number | "...")[] = [];
-    // Всегда показываем первую страницу
-    pages.push(1);
-    // Левая "дырка"
-    if (page > 4) {
-      pages.push("...");
-    }
-    // Центральные страницы
-    const start = Math.max(2, page - 1);
-    const end = Math.min(totalPages - 1, page + 1);
-    pages.push(...createRange(start, end));
-    // Правая "дырка"
-    if (page < totalPages - 3) {
-      pages.push("...");
-    }
-    // Всегда показываем последнюю страницу
-    if (totalPages > 1) {
-      pages.push(totalPages);
-    }
-
-    return pages;
-  };
-
-  const pages = getPages();
 
   return (
     <div className="flex items-center gap-2 mt-5 select-none">
